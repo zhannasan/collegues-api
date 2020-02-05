@@ -1,6 +1,7 @@
 package dev.collegues.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityExistsException;
 import javax.validation.Valid;
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.collegues.entite.Collegue;
-import dev.collegues.entite.PatchData;
 import dev.collegues.service.CollegueService;
 
 @RestController
@@ -54,8 +54,9 @@ public class CollegueController {
 	}
 
 	@PatchMapping(value = "{matricule}")
-	public ResponseEntity<Collegue> patchCollegue(@PathVariable String matricule, @RequestBody PatchData patchData) {
-		return this.collegueService.patchCollegue(matricule, patchData);
+	public ResponseEntity patchCollegue(@PathVariable String matricule,
+			@RequestBody Map<String, String> json) {
+		return this.collegueService.patchCollegue(matricule, json);
 	}
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)

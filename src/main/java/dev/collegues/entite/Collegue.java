@@ -158,5 +158,8 @@ public class Collegue {
 	public void setPhotoUrl(String photoUrl) {
 		this.photoUrl = photoUrl;
 	}
-
+@Override
+public String toString(){
+		return this.nom + " " + this.prenoms + " " + this.email;
+}
 }
