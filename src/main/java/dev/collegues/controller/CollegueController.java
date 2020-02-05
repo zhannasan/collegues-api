@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import dev.collegues.entite.Collegue;
 import dev.collegues.service.CollegueService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("collegues")
 public class CollegueController {
@@ -46,7 +47,6 @@ public class CollegueController {
 		return this.collegueService.collegueByNom(nom);
 	}
 
-	@CrossOrigin
 	@GetMapping(value = "{matricule}")
 	public ResponseEntity<?> collegueByMatricule(@PathVariable String matricule) {
 		return this.collegueService.collegueByMatricule(matricule);
