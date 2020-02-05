@@ -1,6 +1,8 @@
 package dev.collegues;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,9 +32,13 @@ public class StartUp {
 		LOG.info("Démarrage de l'application");
 		if (this.collegueRepository.count() == 0) {
 			String url = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/768px-Circle-icons-profile.svg.png";
-			Collegue col = new Collegue(1, "56789", "Stark", "Bran", "bran.stark@north.org", LocalDate.of(2001, 3, 12),
-					url);
-			this.collegueRepository.save(col);
+			List<Collegue> collegues = new ArrayList<Collegue>();
+			collegues.add(new Collegue(1, "56789", "Stark", "Bran", "bran.stark@north.org", LocalDate.of(2001, 3, 12), url));
+			collegues.add(new Collegue(2, "12345", "Snow", "Jon", "jon.snow@north.org", LocalDate.of(1987, 5, 27), url));
+			collegues.add(new Collegue(3, "98765", "Stark", "Eddard", "eddard.stark@north.org",LocalDate.of(1956, 4, 3), url));
+			collegues.add(new Collegue(4, "45765", "Stark", "Sansa", "sansa.stark@north.org", LocalDate.of(1989, 9, 26),url));
+			collegues.add(new Collegue(5, "92257", "Stark", "Arya", "arya.stark@north.org", LocalDate.of(1996, 6, 14), url));
+			this.collegueRepository.saveAll(collegues);
 		}
 	}
 

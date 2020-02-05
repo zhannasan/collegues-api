@@ -28,6 +28,10 @@ public class CollegueService {
 		this.collegueRepository = collegueRepository;
 	}
 
+	public List<Collegue> collegueAll() {
+		return this.collegueRepository.findAll();
+	}
+
 	public List<String> collegueByNom(String nom) {
 		return this.collegueRepository.findByNom(nom);
 	}

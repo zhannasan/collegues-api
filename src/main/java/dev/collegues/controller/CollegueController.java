@@ -37,6 +37,10 @@ public class CollegueController {
 		this.collegueService = collegueService;
 	}
 
+	@GetMapping
+	public List<Collegue> collegueAll() {
+		return this.collegueService.collegueAll();
+	}
 	@GetMapping(params = "nom")
 	public List<String> collegueByNom(@RequestParam("nom") String nom) {
 		return this.collegueService.collegueByNom(nom);
