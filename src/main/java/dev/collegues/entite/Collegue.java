@@ -6,27 +6,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "collegues")
 public class Collegue {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int id;
+	private int id;
 	@NotEmpty
-	String matricule;
-	@NotEmpty
-	@Size(min = 2)
-	String nom;
+	private String matricule;
 	@NotEmpty
 	@Size(min = 2)
-	String prenoms;
-	String email;
-	LocalDate dateDeNaissance;
-	String photoUrl;
+	private String nom;
+	@NotEmpty
+	@Size(min = 2)
+	private String prenoms;
+	private String email;
+	private LocalDate dateDeNaissance;
+	private String photoUrl;
 
 	/**
 	 * 

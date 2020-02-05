@@ -16,6 +16,11 @@ public interface CollegueRepository extends JpaRepository<Collegue, Integer> {
 	boolean existsByNomAndPrenoms(String nom, String prenoms);
 
 	@Query("Select c from Collegue c where matricule=?1")
-	List<Collegue> findByMatricule(String matricule);
+	Collegue findByMatricule(String matricule);
+
+	@Query("Update Collegue set email=?1, url=?2 where matricule=?3")
+	Collegue update(String email, String url, String matricule);
+
+	boolean existsByMatricule(String matricule);
 
 }

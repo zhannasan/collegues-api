@@ -9,8 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.collegues.entite.Collegue;
+import dev.collegues.entite.PatchData;
 import dev.collegues.service.CollegueService;
 
 @RestController
@@ -25,9 +29,12 @@ import dev.collegues.service.CollegueService;
 public class CollegueController {
 	private CollegueService collegueService;
 
-	@GetMapping
-	public List<Collegue> collegueList() {
-		return this.collegueService.collegueList();
+	/**
+	 * @param collegueService
+	 */
+	public CollegueController(CollegueService collegueService) {
+		super();
+		this.collegueService = collegueService;
 	}
 
 	@GetMapping(params = "nom")
@@ -35,14 +42,20 @@ public class CollegueController {
 		return this.collegueService.collegueByNom(nom);
 	}
 
-	@GetMapping(value = "matricule")
-	public List<Collegue> collegueByMatricule(@RequestParam("matricule") String matricule) {
+	@CrossOrigin
+	@GetMapping(value = "{matricule}")
+	public ResponseEntity<?> collegueByMatricule(@PathVariable String matricule) {
 		return this.collegueService.collegueByMatricule(matricule);
 	}
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Collegue> addCollegue(@RequestBody @Valid Collegue collegue) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(this.collegueService.addCollegue(collegue));
+	}
+
+	@PatchMapping(value = "{matricule}")
+	public ResponseEntity<Collegue> patchCollegue(@PathVariable String matricule, @RequestBody PatchData patchData) {
+		return this.collegueService.patchCollegue(matricule, patchData);
 	}
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
