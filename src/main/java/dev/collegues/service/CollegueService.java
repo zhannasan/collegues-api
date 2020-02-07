@@ -84,5 +84,10 @@ public class CollegueService {
 		return ResponseEntity
 				.ok(this.collegueRepository.update(existing.getEmail(), existing.getPhotoUrl(), matricule));
 		}throw new EntityNotFoundException();
-}
+	}
+
+	public List<Object> colleguePhotoMatricule() {
+		return this.collegueRepository.findAllByMatriculePhotoUrl();
+	}
+
 }

@@ -52,6 +52,12 @@ public class CollegueController {
 		return this.collegueService.collegueByMatricule(matricule);
 	}
 
+
+	@GetMapping(value = "photos")
+	public List<Object> colleguePhotoMatricule() {
+		return this.collegueService.colleguePhotoMatricule();
+	}
+
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Collegue> addCollegue(@RequestBody @Valid Collegue collegue) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(this.collegueService.addCollegue(collegue));
